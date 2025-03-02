@@ -25,7 +25,7 @@ export default function AuthPage() {
   return (
     <div class="flex justify-center items-center min-h-screen bg-gray-100">
       <div class="p-6 bg-white rounded-lg shadow-md">
-        <h1 class="text-2xl mb-4">Login / Register</h1>
+        <h1 class="text-2xl mb-4">Prijava / Registracija</h1>
         {error() && <p class="text-red-500">{error()}</p>}
         <input
           type="email"
@@ -43,10 +43,10 @@ export default function AuthPage() {
         />
         <div class="flex justify-between">
           <button class="btn btn-primary" onClick={handleLogin}>
-            Login
+            Prijava
           </button>
           <button class="btn btn-secondary" onClick={handleRegister}>
-            Register
+            Registracija
           </button>
         </div>
       </div>

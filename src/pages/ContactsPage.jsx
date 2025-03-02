@@ -36,10 +36,10 @@ export default function ContactsPage({ userId }) {
 
   return (
     <div>
-      <h2 class="text-xl font-bold mb-4">Your Contacts</h2>
+      <h2 class="text-xl font-bold mb-4">Vaši kontakti</h2>
       <input
         type="text"
-        placeholder="Search by name"
+        placeholder="Pretražite po imenu"
         class="input input-bordered mb-4 w-full"
         value={search()}
         onInput={(e) => setSearch(e.target.value)}
@@ -57,16 +57,16 @@ export default function ContactsPage({ userId }) {
                 <p>{contact.phone}</p>
               </div>
               <button class="btn btn-error" onClick={() => deleteContact(contact.id)}>
-                Delete
+                Izbriši
               </button>
             </li>
           ))}
       </ul>
       <div class="mt-6">
-        <h3 class="text-lg font-bold mb-2">Add New Contact</h3>
+        <h3 class="text-lg font-bold mb-2">Dodajte novi kontakt</h3>
         <input
           type="text"
-          placeholder="Name"
+          placeholder="Ime"
           class="input input-bordered w-full mb-2"
           value={newContact().name}
           onInput={(e) => setNewContact({ ...newContact(), name: e.target.value })}
@@ -80,13 +80,13 @@ export default function ContactsPage({ userId }) {
         />
         <input
           type="text"
-          placeholder="Phone"
+          placeholder="Telefon"
           class="input input-bordered w-full mb-2"
           value={newContact().phone}
           onInput={(e) => setNewContact({ ...newContact(), phone: e.target.value })}
         />
         <button class="btn btn-primary" onClick={addContact}>
-          Add Contact
+          Dodajte kontakt
         </button>
       </div>
     </div>

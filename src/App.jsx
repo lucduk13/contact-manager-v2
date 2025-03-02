@@ -17,15 +17,15 @@ export default function App() {
   });
 
   return (
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-pink-100">
       {!session() ? (
         <AuthPage />
       ) : (
         <div>
-          <nav class="bg-blue-500 text-white p-4 flex justify-between">
-            <h1 class="text-xl">Contact Manager</h1>
+          <nav class="bg-pink-500 text-white p-5 flex justify-between">
+            <h1 class="text-xl">Upravitelj kontakata</h1>
             <button class="btn btn-secondary" onClick={() => supabase.auth.signOut()}>
-              Logout
+              Odjava
             </button>
           </nav>
           <main class="p-4">
