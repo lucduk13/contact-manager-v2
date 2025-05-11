@@ -7,28 +7,38 @@ export default function ContactsPage({ userId }) {
   const [newContact, setNewContact] = createSignal({ name: "", email: "", phone: "" });
 
   const fetchContacts = async () => {
-    const { data, error } = await supabase
-      .from("contacts")
-      .select("*")
-      .eq("user_id", userId);
-    if (!error) setContacts(data);
+    try {
+      const data = await pocketbase.collection('contacts').getFullList({
+        filter: `user_id = "${userId}"`,
+      });
+      setContacts(data);
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
   const addContact = async () => {
-    const { error } = await supabase.from("contacts").insert({
-      ...newContact(),
-      user_id: userId,
-    });
-    if (!error) {
+    try {
+      await pocketbase.collection('contacts').create({
+        ...newContact(),
+        user_id: userId,
+      });
       setNewContact({ name: "", email: "", phone: "" });
       fetchContacts();
+    } catch (err) {
+      console.error(err.message);
     }
   };
 
   const deleteContact = async (id) => {
-    const { error } = await supabase.from("contacts").delete().eq("id", id);
-    if (!error) fetchContacts();
+    try {
+      await pocketbase.collection('contacts').delete(id);
+      fetchContacts();
+    } catch (err) {
+      console.error(err.message);
+    }
   };
+
 
   onMount(() => {
     fetchContacts();

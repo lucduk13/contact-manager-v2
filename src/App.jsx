@@ -7,14 +7,15 @@ import AuthPage from "./pages/AuthPage";
 export default function App() {
   const [session, setSession] = createSignal(null);
 
-  onMount(async () => {
-    const { data: sessionData } = await supabase.auth.getSession();
-    setSession(sessionData.session);
+  onMount(() => {
+    const session = pocketbase.authStore.model;
+    setSession(session);
 
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
+    pocketbase.authStore.onChange(() => {
+      setSession(pocketbase.authStore.model);
     });
   });
+
 
   return (
     <div class="min-h-screen bg-pink-100">

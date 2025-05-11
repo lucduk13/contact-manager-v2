@@ -7,20 +7,21 @@ export default function AuthPage() {
   const [error, setError] = createSignal("");
 
   const handleLogin = async () => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email(),
-      password: password(),
-    });
-    if (error) setError(error.message);
+    try {
+      await pocketbase.collection('users').authWithPassword(email(), password());
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   const handleRegister = async () => {
-    const { error } = await supabase.auth.signUp({
-      email: email(),
-      password: password(),
-    });
-    if (error) setError(error.message);
+    try {
+      await pocketbase.collection('users').create({ email: email(), password: password() });
+    } catch (err) {
+      setError(err.message);
+    }
   };
+
 
   return (
     <div class="flex justify-center items-center min-h-screen bg-gray-100">
